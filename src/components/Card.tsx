@@ -10,7 +10,7 @@ interface CardSubProps {
 
 export const CardSub = (Props:CardSubProps) => {
     const { 
-        icon: { nameIcon, color, nameService }, 
+        icon: { nameIcon, color }, 
         subInfo: {
             id,
             name,
@@ -50,7 +50,7 @@ export const CardSub = (Props:CardSubProps) => {
                         color: '#fff'
                     }]}>
                         {
-                            nameService
+                            name
                         }
                     </Text>
                 </View>

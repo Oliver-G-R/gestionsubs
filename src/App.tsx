@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, SafeAreaView, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { globalStyle } from './constants/style';
 import { CardSub } from './components/Card';
 
@@ -14,7 +14,6 @@ export default function App() {
           icon={{
             nameIcon: 'youtube',
             color: '#FF0000',
-            nameService: 'Youtube'
           }}
           subInfo={{
             id: "1",
@@ -30,7 +29,6 @@ export default function App() {
           icon={{
             nameIcon: 'microsoft-xbox',
             color: '#107C10',
-            nameService: 'Xbox'
           }}
           subInfo={{
             id: "2",
@@ -46,7 +44,6 @@ export default function App() {
           icon={{
             nameIcon: 'sony-playstation',
             color: '#004DB5',
-            nameService: 'Playstation'
           }}
           subInfo={{
             id: "3",
@@ -62,7 +59,6 @@ export default function App() {
           icon={{
             nameIcon: 'spotify',
             color: '#1DB954',
-            nameService: 'Spotify'
           }}
           subInfo={{
             id: "3",

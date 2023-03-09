@@ -1,6 +1,5 @@
 interface IconService {
     nameIcon: string;
-    nameService: string;
     color: string;
 }
 
