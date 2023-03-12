@@ -43,7 +43,7 @@ export const CardSub = (Props:CardSubProps) => {
                     <Icon
                         name={nameIcon}
                         type="material-community"
-                        color={showInfo ? '#fff' : '#404040'}
+                        color={showInfo ? '#fff' : color}
                         size={40}
                     />
                     <Text style={[style.nameService, showInfo && {
@@ -78,7 +78,7 @@ export const CardSub = (Props:CardSubProps) => {
                         <Text style={style.textInfo}>
                             Nombre
                         </Text>
-                        <Text style={style.textInfo}>
+                        <Text style={[style.textInfo, style.textInfoValue]}>
                             {name}
                         </Text>
                 </View>
@@ -87,7 +87,7 @@ export const CardSub = (Props:CardSubProps) => {
                         <Text style={style.textInfo}>
                             Descripcion    
                         </Text>
-                        <Text style={style.textInfo}>
+                        <Text style={[style.textInfo, style.textInfoValue]}>
                             {description}
                         </Text>
                 </View>
@@ -96,7 +96,7 @@ export const CardSub = (Props:CardSubProps) => {
                     <Text style={style.textInfo}>
                         Fecha de inicio    
                     </Text>
-                    <Text style={style.textInfo}>
+                    <Text style={[style.textInfo, style.textInfoValue]}>
                         {
                             new Date(firstPayment).toLocaleDateString()
                         }
@@ -107,7 +107,7 @@ export const CardSub = (Props:CardSubProps) => {
                     <Text style={style.textInfo}>
                         Fecha de pago
                     </Text>
-                    <Text style={style.textInfo}>
+                    <Text style={[style.textInfo, style.textInfoValue]}>
                         {
                             new Date(firstPayment).toLocaleDateString()
                         }
@@ -118,7 +118,7 @@ export const CardSub = (Props:CardSubProps) => {
                     <Text style={style.textInfo}>
                         Ciclo de pago    
                     </Text>
-                    <Text style={style.textInfo}>
+                    <Text style={[style.textInfo, style.textInfoValue]}>
                         {cycle}
                     </Text>
                 </View>
@@ -134,15 +134,20 @@ const style = StyleSheet.create({
     container:{
         paddingHorizontal: 20,
         paddingVertical: 15,
-        backgroundColor: '#E9E9E9',
+        backgroundColor: '#1f1e1e',
         width: '100%',
         overflow: 'hidden',
-        borderRadius: 10,
+        borderRadius: 20,
         marginVertical: 10,
+        elevation: 6,
+
         
     },
     textInfo:{
         color: '#fff',
+    },
+    textInfoValue: {
+        fontWeight: 'bold',
     },
 
     /**
@@ -150,7 +155,7 @@ const style = StyleSheet.create({
      */
 
     showBorder:{
-        borderBottomColor: '#909090',
+        borderBottomColor: '#ffff',
         borderBottomWidth: 1,
         paddingBottom: 10,
         marginBottom: 20,
@@ -166,13 +171,13 @@ const style = StyleSheet.create({
     service:{
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 7,
+        gap: 15,
 
     },
     nameService:{
         fontWeight: 'bold',
         fontSize: 17,
-        color: '#404040',
+        color: '#fff',
 
     },
     price:{
