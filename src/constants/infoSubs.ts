@@ -3,7 +3,7 @@ import { SubServiceAvailable } from "../models/Sub";
 export const subscriptionsAvailable:SubServiceAvailable[] = [
   {
     nameIcon: 'netflix',
-    color: '#AB060F',
+    color: '#D90913',
     title: 'Netflix',
     type: 'material-community'
   },
@@ -51,19 +51,19 @@ export const subscriptionsAvailable:SubServiceAvailable[] = [
   },
   {
     nameIcon: 'github',
-    color: '#000000',
+    color: '#000',
     title: 'Github',
     type: 'font-awesome'
   },
   {
     nameIcon: 'steam',
-    color: '#000000',
+    color: '#173D78',
     title: 'Steam',
     type: 'font-awesome'
   },
   {
     nameIcon: 'cloud',
-    color: '#000000',
+    color: '#4C90F3',
     title: 'iCloud',
     type: 'font-awesome'
   },
