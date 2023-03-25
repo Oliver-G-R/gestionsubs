@@ -12,7 +12,7 @@ interface IFAB{
 
 }
 
-export const Fab:FC<IFAB> = ({ bckColor, onPress, name, type = "material-community", color = '#fff', size = 30 }) => {
+export const Fab:FC<IFAB> = ({ bckColor, onPress, name, type = "font-awesome", color = '#fff', size = 30 }) => {
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -23,6 +23,9 @@ export const Fab:FC<IFAB> = ({ bckColor, onPress, name, type = "material-communi
           type={type}
           color={color}
           size={size}
+          iconStyle={{
+          }}
+          
         />
     </TouchableOpacity>
   )

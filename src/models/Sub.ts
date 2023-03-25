@@ -1,9 +1,3 @@
-interface IconService {
-    nameIcon: string;
-    color: string;
-}
-
-
 interface Subscription {
     id: string;
     name: string;
@@ -13,9 +7,19 @@ interface Subscription {
     firstPayment: Date;
     cycle: string;
 }
+interface IconService{
+    nameIcon: string;
+    color: string;
+    type: string;
+}
+
+interface SubServiceAvailable extends IconService{
+    title: string;
+}
 
 
 export {
-    IconService,
-    Subscription
+    Subscription,
+    SubServiceAvailable,
+    IconService
 }

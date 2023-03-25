@@ -13,6 +13,7 @@ export const ListCardSub = () => {
             icon={{
               nameIcon: 'youtube',
               color: '#FF0000',
+              type:"font-awesome"
             }}
             subInfo={{
               id: "1",
@@ -24,82 +25,7 @@ export const ListCardSub = () => {
               cycle: 'Mensual',
             }}
           />
-          <CardSub
-            icon={{
-              nameIcon: 'microsoft-xbox',
-              color: '#107C10',
-            }}
-            subInfo={{
-              id: "2",
-              name: 'Xbox Live Gold',
-              price: 11.99,
-              membership: 'Mensual',
-              description: 'Pago mensual compartido',
-              firstPayment: new Date(),
-              cycle: 'Mensual',
-            }}
-          />
-          <CardSub
-            icon={{
-              nameIcon: 'sony-playstation',
-              color: '#004DB5',
-            }}
-            subInfo={{
-              id: "3",
-              name: 'Playstation Plus',
-              price: 11.99,
-              membership: 'Mensual',
-              description: 'Pago mensual compartido',
-              firstPayment: new Date(),
-              cycle: 'Mensual',
-            }}
-          />
-          <CardSub
-            icon={{
-              nameIcon: 'sony-playstation',
-              color: '#004DB5',
-            }}
-            subInfo={{
-              id: "3",
-              name: 'Playstation Plus',
-              price: 11.99,
-              membership: 'Mensual',
-              description: 'Pago mensual compartido',
-              firstPayment: new Date(),
-              cycle: 'Mensual',
-            }}
-          />
-          <CardSub
-            icon={{
-              nameIcon: 'sony-playstation',
-              color: '#004DB5',
-            }}
-            subInfo={{
-              id: "3",
-              name: 'Playstation Plus',
-              price: 11.99,
-              membership: 'Mensual',
-              description: 'Pago mensual compartido',
-              firstPayment: new Date(),
-              cycle: 'Mensual',
-            }}
-          />
-          <CardSub
-            icon={{
-              nameIcon: 'spotify',
-              color: '#1DB954',
-            }}
-            subInfo={{
-              id: "3",
-              name: 'Spotify Premium',
-              price: 11.99,
-              membership: 'Mensual',
-              description: 'Pago mensual compartido',
-              firstPayment: new Date(),
-              cycle: 'Mensual',
-            }}
-          />
-          
+        
     
         </ScrollView>
       </View>

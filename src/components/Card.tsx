@@ -10,7 +10,7 @@ interface CardSubProps {
 
 export const CardSub = (Props:CardSubProps) => {
     const { 
-        icon: { nameIcon, color }, 
+        icon: { nameIcon, color, type }, 
         subInfo: {
             id,
             name,
@@ -42,7 +42,7 @@ export const CardSub = (Props:CardSubProps) => {
                 <View style={style.service}>
                     <Icon
                         name={nameIcon}
-                        type="material-community"
+                        type={type}
                         color={showInfo ? '#fff' : color}
                         size={40}
                     />
@@ -137,7 +137,7 @@ const style = StyleSheet.create({
         backgroundColor: '#1f1e1e',
         width: '100%',
         overflow: 'hidden',
-        borderRadius: 20,
+        borderRadius: 10,
         marginVertical: 10,
         elevation: 6,
 
