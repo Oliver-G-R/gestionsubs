@@ -1,23 +1,31 @@
+import { useState, Dispatch, SetStateAction, useEffect } from 'react';
 import { FlatList, View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import { PopUpModal } from './PopUpModal';
 import { ISubModal } from '../models/Modal';
 import { subscriptionsAvailable } from '../constants/infoSubs';
-import { SubsAddModal } from './SubsAddModal';
+import { SubsFormModal } from './SubsFormModal';
 import { SubServiceAvailable } from '../models/Sub';
 import { Icon } from 'react-native-elements';
-import { useEffect, useState } from 'react';
 import { useSearchFilter } from '../hooks/useSearchFilter';
 
 export const ChooseSub = ({setShowModal, showModal}:ISubModal) => {
-  const [subAvailable, setSubAvailable] = useState(subscriptionsAvailable)
+  const [selectedSub, setSelectedSub] =  useState<SubServiceAvailable>()
+  const [showAddSubModal, setShowAddSubModal] = useState(false)
+
   const [searchText, SetSearchText] = useState("")
-  const [filterData] = useSearchFilter(subAvailable, searchText, 'title')
+
+  const [filterData] = useSearchFilter(subscriptionsAvailable, searchText, 'title')
+
+  // useEffect(() => {
+  //     !showAddSubModal && setShowModal(false)
+  // }, [showAddSubModal])
 
   return (
     <>
       <PopUpModal
-        setIsOpen={setShowModal}
         showModal={showModal}
+        setIsOpen={setShowModal}
+        height={'85%'}
       > 
         <>
           <View style={styleChooseSub.boxSearch}>
@@ -40,33 +48,57 @@ export const ChooseSub = ({setShowModal, showModal}:ISubModal) => {
             data={filterData}
             showsVerticalScrollIndicator={false}
             keyExtractor={item => item.nameIcon}
-            renderItem={({item}) => <CardSubChoose {...item} />}
+            renderItem={({item}) => 
+              <CardSubChoose 
+                  setSelectedSub={setSelectedSub} 
+                  setShowAddSubModal={setShowAddSubModal}
+                  {...item} 
+              />}
           />
         </>
       </PopUpModal>
 
-      {/* <SubsAddModal
-
-      /> */}
+      {showAddSubModal && <SubsFormModal
+        showModal={showAddSubModal}
+        setShowModal={setShowAddSubModal}
+        infoSubAvailable={selectedSub!}
+      />}
     </>
   )
 }
 
 
+interface CardSubChooseProps extends SubServiceAvailable{
+  setSelectedSub: Dispatch<SetStateAction<SubServiceAvailable | undefined>>
+  setShowAddSubModal: Dispatch<SetStateAction<boolean>>
+  
+} 
 
-const CardSubChoose = ({title, color, type, nameIcon}:SubServiceAvailable) => {
+const CardSubChoose = ({title, color, type, nameIcon, setSelectedSub, setShowAddSubModal}:CardSubChooseProps) => {
+  
+  const onPressSelected = () => {
+    setSelectedSub({
+      title,
+      color,
+      type,
+      nameIcon
+    })
+    setShowAddSubModal(prev => !prev)
+  }
+
   return (
     <TouchableOpacity 
-      activeOpacity={0.8}
+      onPress={() => onPressSelected()}
+      activeOpacity={0.7}
       style={[styleSubAvailable.container, {
-        backgroundColor: color
+        backgroundColor: '#1f1e1e'
     }]}>
       <View style={styleSubAvailable.logo}>
         <Icon
           type={type}
           size={30}
           name={nameIcon}
-          color='#fff'
+          color={color}
         />
         <Text style={styleSubAvailable.title}>{title}</Text>
       </View>

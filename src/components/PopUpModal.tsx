@@ -1,14 +1,16 @@
 import { FC, Dispatch, SetStateAction } from 'react'
-import { Modal, StyleSheet, TouchableOpacity, View } from 'react-native'
+import {Text, Modal, StyleSheet, TouchableOpacity, View } from 'react-native'
 import { Icon } from 'react-native-elements'
 
 interface IPopUpModalOptions {
   setIsOpen: Dispatch<SetStateAction<boolean>>
   showModal: boolean
   children: JSX.Element
+  height?: string | number 
+  bColor?: string
 }
 
-export const PopUpModal:FC<IPopUpModalOptions> = ({ setIsOpen, showModal, children }) => {
+export const PopUpModal:FC<IPopUpModalOptions> = ({ setIsOpen, showModal, children, height, bColor }) => {
   return (
     <Modal
       animationType="slide"
@@ -22,17 +24,22 @@ export const PopUpModal:FC<IPopUpModalOptions> = ({ setIsOpen, showModal, childr
         }}>
 
           <View
-            style={style.container}>
+            style={[style.container, {
+              height: height || '60%',
+              backgroundColor:  bColor || '#131313'
+            }]}>
               <TouchableOpacity
                 style={style.donebtn}
-                onPress={() => setIsOpen(false)}
+                onPress={() => {
+                  setIsOpen(false)
+                }}
                 activeOpacity={0.8}>
-                <Icon
-                  name="close"
-                  type="material-community"
-                  color="#ffff"
-                  size={30}
-                />
+                  <Icon
+                    type='material-community'
+                    name='arrow-left-circle'
+                    color={bColor || '#000'}
+                    size={20}
+                  />
               </TouchableOpacity>
              {children}
           </View>
@@ -49,21 +56,21 @@ const style = StyleSheet.create({
     borderTopStartRadius: 20,
     padding: 15,
     position: 'absolute',
-    backgroundColor: '#131313',
     bottom: 0
   },
 
   doneText: {
-    fontSize: 19,
-    marginBottom: 10,
-    color: '#000'
+    fontSize: 14,
   },
 
   donebtn: {
-    width: 30,
+    padding: 5,
+    width: 55,
+    alignItems: 'center',
+    marginLeft: 'auto',
     borderRadius: 15,
-    marginBottom: 10,
-    backgroundColor: '#1f1e1e'
+    marginBottom: 20,
+    backgroundColor: '#fff'
   },
 
   option: {

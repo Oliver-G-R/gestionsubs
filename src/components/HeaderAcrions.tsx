@@ -1,7 +1,6 @@
 import { ScrollView, StyleSheet, TextInput, View } from 'react-native';
 import { Fab } from './FAB';
 import { useState } from 'react';
-import { SubsAddModal } from './SubsAddModal';
 import { ChooseSub } from './ChooseSub';
 
 
