@@ -57,7 +57,7 @@ export const CardSub = (Props:CardSubProps) => {
                             }
                         </Text>
                     </View>
-                    <View>
+                    <View style={style.paymentContent}>
                         <Text style={[style.price, showInfo && {
                             color: '#fff'
                         }]}>
@@ -154,6 +154,11 @@ const style = StyleSheet.create({
         fontWeight: 'bold',
     },
 
+    paymentContent: {
+        width: 100,
+        alignItems: 'flex-end',
+    },
+
     /**
      * Estilos propios para cuando se muestra la informacion de la tarjeta
      */
@@ -176,7 +181,7 @@ const style = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         gap: 15,
-
+        width: 100,
     },
     nameService:{
         fontWeight: 'bold',
