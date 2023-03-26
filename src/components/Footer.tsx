@@ -1,20 +1,28 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { useState, useContext } from 'react';
+import { SubContext } from '../context/SubContext';
 
 export const Footer = () => {
+  const [perCycle, setPerCycle] = useState<'anual' | 'mensual'>('anual')
+  const { totalCost } = useContext(SubContext)
   return (
-    <View style={Style.container}>
+    <TouchableOpacity
+      style={Style.container}
+      activeOpacity={0.99}
+      onPress={() => setPerCycle(prev => prev === 'anual' ? 'mensual' : 'anual')}
+      >
       <View>
         <Text style={Style.text}>
           Todos los gastos
         </Text>
         <Text style={Style.textTime}>
-          Al mes 
+          Al {perCycle === 'anual' ? 'año' : 'mes'} 
         </Text>
       </View>
       <Text style={Style.price}>
-        $ 293.20
+        $ {totalCost(perCycle)}
       </Text>
-    </View>
+    </TouchableOpacity>
   )
 }
 
