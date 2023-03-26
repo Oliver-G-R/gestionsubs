@@ -1,4 +1,4 @@
-import { useState, Dispatch, SetStateAction, useContext } from 'react';
+import { useState, Dispatch, SetStateAction, useContext, useEffect } from 'react';
 import { ScrollView, StyleSheet, TextInput, View, Text, Platform, Alert } from 'react-native';
 import { Icon } from 'react-native-elements';
 
@@ -15,7 +15,7 @@ import { SubContext } from '../context/SubContext';
 
 interface SubsFormModalProps extends ISubModal {
   infoSubAvailable: SubServiceAvailable
-  currentId?: number 
+  currentId?: string 
   setNestedModal?: Dispatch<SetStateAction<boolean>> 
 }
 
@@ -30,7 +30,7 @@ export const SubsFormModal = ({showModal, infoSubAvailable, setShowModal, curren
     cycle: 'mensual',
   })
 
-  const { add } = useContext(SubContext)
+  const { add, update, removeById,  fullSubscription } = useContext(SubContext)
 
   const [showDatePicker, setShowDatePicker] = useState(false)
 
@@ -81,19 +81,28 @@ export const SubsFormModal = ({showModal, infoSubAvailable, setShowModal, curren
     if(!currentId){
       //si va guardar
       if (newSubscription.name.trim() === '') {
-        return Alert.alert('Veri', 'El nombre es obligatorio')
+        return Alert.alert('Verifica', 'El nombre es obligatorio')
       }
       add({
         ...newSubscription,
         ...infoSubAvailable
       })
-      setShowModal(false)
-      setNestedModal && setNestedModal(false)
     }else{
-      //si va actualizar
-
+      update(currentId, {
+        ...newSubscription,
+        ...infoSubAvailable,
+      })
     }
+    setShowModal(false)
+    setNestedModal && setNestedModal(false)
   }
+
+  useEffect(() => {
+    if (currentId) {
+      const sub = fullSubscription.find(sub => sub.id === currentId)
+      setNewSubscription(sub as SubscriptionSatate)
+    }
+  }, [])
 
   return (
      <PopUpModal
@@ -102,8 +111,6 @@ export const SubsFormModal = ({showModal, infoSubAvailable, setShowModal, curren
         height={currentId ? '90%' :  '88%'}
         bColor={infoSubAvailable.color}
       >
-        <View style={styles.container}>
-
           <ScrollView
             showsVerticalScrollIndicator={false}
           > 
@@ -196,27 +203,35 @@ export const SubsFormModal = ({showModal, infoSubAvailable, setShowModal, curren
                 </Picker>
                 
               </View >
+            </View >
+            <View style={styles.containerBtns}>
               <TouchableOpacity
                 onPress={() => controlSub()}
-                style={styles.btnSave}
+                style={styles.btn}
                 activeOpacity={0.8}>
                 <Text 
-                    style={[styles.btnTextSave, {color: infoSubAvailable.color}]}>
+                    style={[styles.btnText, {color: infoSubAvailable.color}]}>
                     { currentId ? 'Actualizar' : 'Guardar'}
                 </Text>
               </TouchableOpacity>
+              { currentId && <TouchableOpacity
+                onPress={() => removeById(currentId)}
+                style={[styles.btn, styles.btnDelete]}
+                activeOpacity={0.8}>
+                <Text 
+                    style={[styles.btnText, {color: '#fff'}]}>
+                    Eliminar
+                </Text>
+              </TouchableOpacity>}
             </View >
 
   
           </ScrollView>
-        </View>
       </PopUpModal>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-  },
   containerInput: {
     paddingHorizontal: 30,
     gap: 10
@@ -252,20 +267,27 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     textAlign: 'center'
   },
-  btnTextSave: {
+  btnText: {
     fontWeight: 'bold',
     fontSize: 18
   },
-  btnSave: {
+  btn: {
     borderRadius: 10,
     alignItems: 'center',
     backgroundColor: "#fff",
     padding: 10,
-    marginTop: 20
+  },
+  btnDelete: {
+    backgroundColor: '#E45454',
   },
   date:{
     color: '#fff', 
     fontSize: 15, 
     marginBottom: 10
+  },
+  containerBtns:{
+    gap: 10,
+    marginTop: 20,
+    marginBottom: 20,
   }
 })

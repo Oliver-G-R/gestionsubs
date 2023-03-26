@@ -14,6 +14,7 @@ export const ListCardSub = () => {
           showsVerticalScrollIndicator={false}
           data={fullSubscription}
           keyExtractor={item => item.id.toString()}
+          
           renderItem={({item}) => (
             <CardSub
               icon={{

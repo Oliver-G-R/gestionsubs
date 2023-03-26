@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { IconService, Subscription } from '../models/Sub';
+import { SubsFormModal } from './SubsFormModal';
 
 interface CardSubProps {
     icon: IconService,
@@ -22,99 +23,113 @@ export const CardSub = (Props:CardSubProps) => {
         }
     } = Props
     const [showInfo, setShowInfo] = useState(false)
+    const [showFormSubModal, setShowFormSubModal] = useState(false)
+
     
-
-
     return (
-        <TouchableOpacity 
-            onPress={() => setShowInfo(!showInfo)}
-            activeOpacity={0.8}
-            style={[
-                style.container, 
-                showInfo && {
-                    backgroundColor: color,
-                }
-            ]}>
-            <View style={[
-                style.header,
-                showInfo && style.showBorder, 
+        <>
+            <TouchableOpacity 
+                onPress={() => setShowInfo(!showInfo)}
+                onLongPress={() => setShowFormSubModal(true)}
+                activeOpacity={0.8}
+                style={[
+                    style.container, 
+                    showInfo && {
+                        backgroundColor: color,
+                    }
                 ]}>
-                <View style={style.service}>
-                    <Icon
-                        name={nameIcon}
-                        type={type}
-                        color={showInfo ? '#fff' : color}
-                        size={40}
-                    />
-                    <Text style={[style.nameService, showInfo && {
-                        color: '#fff'
-                    }]}>
-                        {
-                            name
-                        }
-                    </Text>
+                <View style={[
+                    style.header,
+                    showInfo && style.showBorder, 
+                    ]}>
+                    <View style={style.service}>
+                        <Icon
+                            name={nameIcon}
+                            type={type}
+                            color={showInfo ? '#fff' : color}
+                            size={40}
+                        />
+                        <Text style={[style.nameService, showInfo && {
+                            color: '#fff'
+                        }]}>
+                            {
+                                name
+                            }
+                        </Text>
+                    </View>
+                    <View>
+                        <Text style={[style.price, showInfo && {
+                            color: '#fff'
+                        }]}>
+                            $ {price}
+                        </Text>
+                        <Text style={[style.membership, showInfo && {
+                            color: '#fff'
+                        }]}>
+                            {membership}
+                        </Text>
+                    </View>
                 </View>
-                <View>
-                    <Text style={[style.price, showInfo && {
-                        color: '#fff'
-                    }]}>
-                        $ {price}
-                    </Text>
-                    <Text style={[style.membership, showInfo && {
-                        color: '#fff'
-                    }]}>
-                        {membership}
-                    </Text>
-                </View>
-            </View>
-
-            {/* cuerpo de la tarjeta */}
-
-            <View style={[
-                style.body,
-                showInfo && {display: 'flex'},
-            ]}>
-                <View style={style.info}>
+    
+                {/* cuerpo de la tarjeta */}
+    
+                <View style={[
+                    style.body,
+                    showInfo && {display: 'flex'},
+                ]}>
+                    <View style={style.info}>
+                            <Text style={style.textInfo}>
+                                Nombre
+                            </Text>
+                            <Text style={[style.textInfo, style.textInfoValue]}>
+                                {name}
+                            </Text>
+                    </View>
+                        
+                    {description && <View style={style.info}>
+                            <Text style={style.textInfo}>
+                                Descripcion    
+                            </Text>
+                            <Text style={[style.textInfo, style.textInfoValue]}>
+                                {description}
+                            </Text>
+                    </View>}
+                        
+                    <View style={style.info}>
                         <Text style={style.textInfo}>
-                            Nombre
+                            Fecha de pago
                         </Text>
                         <Text style={[style.textInfo, style.textInfoValue]}>
-                            {name}
+                            {
+                                new Date(paymentDay).toLocaleDateString('es-ES')
+                            }
                         </Text>
-                </View>
+                    </View>
                     
-                {description && <View style={style.info}>
+                    <View style={style.info}>
                         <Text style={style.textInfo}>
-                            Descripcion    
+                            Ciclo de pago    
                         </Text>
                         <Text style={[style.textInfo, style.textInfoValue]}>
-                            {description}
+                            {cycle}
                         </Text>
-                </View>}
-                    
-                <View style={style.info}>
-                    <Text style={style.textInfo}>
-                        Fecha de pago
-                    </Text>
-                    <Text style={[style.textInfo, style.textInfoValue]}>
-                        {
-                            new Date(paymentDay).toLocaleDateString('es-ES')
-                        }
-                    </Text>
+                    </View>
+    
+                   
                 </View>
-                
-                <View style={style.info}>
-                    <Text style={style.textInfo}>
-                        Ciclo de pago    
-                    </Text>
-                    <Text style={[style.textInfo, style.textInfoValue]}>
-                        {cycle}
-                    </Text>
-                </View>
-
-               
-            </View>
-        </TouchableOpacity>
+            </TouchableOpacity>
+            <SubsFormModal
+                showModal={showFormSubModal}
+                setShowModal={setShowFormSubModal}
+                infoSubAvailable={{
+                    nameIcon,
+                    color,
+                    title: name,
+                    type
+                }}
+                currentId={id}
+            />
+        </>
     )
 }
 

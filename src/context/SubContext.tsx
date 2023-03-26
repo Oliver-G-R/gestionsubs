@@ -11,7 +11,7 @@ interface SubContextState {
   fullSubscription:  FullSubscription[]
   add: (sub:  Omit<FullSubscription, "id">) => void
   removeById: (id: string) => void
-  update: (id: string, sub:  FullSubscription) => void
+  update: (id: string, sub: Omit<FullSubscription, "id">) => void
 }
 
 
@@ -19,7 +19,7 @@ const SubContextStateDefault: SubContextState = {
   fullSubscription: [],
   add: (sub: Omit<FullSubscription, "id">) => {},
   removeById: (id: string) => {},
-  update: (id: string, sub:  FullSubscription) => {}
+  update: (id: string, sub:   Omit<FullSubscription, "id">) => {}
 }
 
 export const SubContext =  createContext(SubContextStateDefault);
@@ -37,7 +37,7 @@ export const SubContextProvider = ({ children } : SubContextProviderProps) => {
     setSubscription(newSubs)
   }
 
-  const update = (id: string, sub:  FullSubscription) => {
+  const update = (id: string, sub: Omit<FullSubscription, "id">) => {
     const newSubs = fullSubscription.map(subItem => subItem.id === id ? {...subItem, ...sub} : subItem)
     setSubscription(newSubs)
   }
