@@ -16,12 +16,6 @@ export const ChooseSub = ({setShowModal, showModal}:ISubModal) => {
 
   const [filterData] = useSearchFilter(subscriptionsAvailable, searchText, 'title')
 
-  useEffect(() => {
-      if(!showAddSubModal && !selectedSub) {
-        setShowModal(false)
-      }
-  }, [showAddSubModal])
-
   return (
     <>
       <PopUpModal
