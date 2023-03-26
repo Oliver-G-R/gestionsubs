@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native';
 import { globalStyle } from './constants/style';
@@ -7,11 +8,17 @@ import { HeaderAcrions } from './components/HeaderAcrions';
 import { Footer } from './components/Footer';
 
 export default function App() {
+  const [search, setSearch] = useState("")
   return (
     <AppState>
         <SafeAreaView style={globalStyle.container}>
-            <HeaderAcrions/>
-            <ListCardSub/>
+            <HeaderAcrions
+              setSearch={setSearch}
+              search={search}
+            />
+            <ListCardSub
+              search={search}
+            />
         </SafeAreaView >
           <Footer/>
         <StatusBar  style='light' />

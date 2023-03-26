@@ -1,18 +1,22 @@
-import { ScrollView, StyleSheet, TextInput, View } from 'react-native';
+import { StyleSheet, TextInput, View } from 'react-native';
 import { Fab } from './FAB';
-import { useState } from 'react';
+import { useState, Dispatch, SetStateAction } from 'react';
 import { ChooseSub } from './ChooseSub';
 
-
-export const HeaderAcrions = () => {
+interface HeaderAcrionsProps {
+  setSearch: Dispatch<SetStateAction<string>>
+  search: string
+}
+export const HeaderAcrions = ({search, setSearch}:HeaderAcrionsProps) => {
   const [showModal, setShowModal ] = useState(false)
-  
   return (
     <>
       <View style={Style.headerAction}> 
           <View>
             <TextInput
               placeholderTextColor={'#fff'}
+              onChangeText={setSearch}
+              value={search}
               placeholder='Buscar alguna sub'
             />
           </View>

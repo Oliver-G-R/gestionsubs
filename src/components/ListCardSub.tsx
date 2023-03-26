@@ -2,19 +2,22 @@ import { CardSub } from './Card';
 import { FlatList, ScrollView, StyleSheet, View, Image, Text } from 'react-native';
 import { useContext } from 'react';
 import { SubContext } from '../context/SubContext';
+import { useSearchFilter } from '../hooks/useSearchFilter';
 
-export const ListCardSub = () => {
+interface ListCardSubProps {
+  search: string
+}
+export const ListCardSub = ({search}: ListCardSubProps) => {
   const { fullSubscription } = useContext(SubContext)
-
+  const [ filterData ] = useSearchFilter(fullSubscription, search, 'name')
 
   return (
       <View style={Style.containerCard}>
         {fullSubscription.length > 0 ? <FlatList
           style={Style.containerCard}
           showsVerticalScrollIndicator={false}
-          data={fullSubscription}
+          data={filterData}
           keyExtractor={item => item.id.toString()}
-          
           renderItem={({item}) => (
             <CardSub
               icon={{
