@@ -22,7 +22,6 @@ export const Footer = () => {
 const Style = StyleSheet.create({
   container:{
     backgroundColor: '#1f1e1e',
-    height: 100,
     width: '100%',
     padding: 20,
     flexDirection: 'row',

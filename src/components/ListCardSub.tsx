@@ -1,13 +1,15 @@
 import { CardSub } from './Card';
-import { FlatList, ScrollView, StyleSheet, View } from 'react-native';
+import { FlatList, ScrollView, StyleSheet, View, Image, Text } from 'react-native';
 import { useContext } from 'react';
 import { SubContext } from '../context/SubContext';
 
 export const ListCardSub = () => {
   const { fullSubscription } = useContext(SubContext)
+
+
   return (
       <View style={Style.containerCard}>
-        <FlatList
+        {fullSubscription.length > 0 ? <FlatList
           style={Style.containerCard}
           showsVerticalScrollIndicator={false}
           data={fullSubscription}
@@ -30,16 +32,45 @@ export const ListCardSub = () => {
               }}
             />
           )}
-          
-        />
-    
+
+        /> : <EmptyList/>}
+
       </View>
   )
 }
 
+const EmptyList = () => (
+  <View style={styleEmptyList.container}>
+    <Image
+      source={require('../../assets/emptysvg.png')}
+      style={{
+        width: 350,
+        height: 350,
+      }}
+    />
+
+    <Text style={styleEmptyList.text}>
+      No hay suscripciones
+    </Text>
+  </View>
+)
+
+const styleEmptyList = StyleSheet.create({
+  container: {
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  text: {
+    fontSize: 30,
+    color: '#fff',
+    fontWeight: 'bold',
+  }
+
+})
 const Style = StyleSheet.create({
   containerCard: {
     marginTop: 10,
     height: '85%',
-  }
+  },
+
 })

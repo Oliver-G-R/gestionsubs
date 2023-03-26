@@ -36,10 +36,10 @@ export const HeaderAcrions = () => {
 
 const Style = StyleSheet.create({
   headerAction:{
-    marginTop: 40,
+    marginTop: 30,
     width: '80%',
     backgroundColor: '#1f1e1e',
-    padding: 15,
+    padding: 10,
     borderRadius: 15,
   }
 

@@ -33,11 +33,11 @@ export const Fab:FC<IFAB> = ({ bckColor, onPress, name, type = "font-awesome", c
 
 const style = StyleSheet.create({
   fab: {
-    width: 55,
-    height: 55,
+    width: 45,
+    height: 45,
     position: 'absolute',
     zIndex: 3,
-    top: 60,
+    top: 50,
     right: 10,
     alignItems: 'center',
     justifyContent: 'center',
