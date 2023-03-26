@@ -1,5 +1,5 @@
-import { useState, Dispatch, SetStateAction } from 'react';
-import { ScrollView, StyleSheet, TextInput, View, Text, Platform } from 'react-native';
+import { useState, Dispatch, SetStateAction, useContext } from 'react';
+import { ScrollView, StyleSheet, TextInput, View, Text, Platform, Alert } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 import { TouchableOpacity } from 'react-native';
@@ -10,6 +10,7 @@ import { SubServiceAvailable, SubscriptionSatate } from '../models/Sub';
 
 import { Picker } from '@react-native-picker/picker';
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker'
+import { SubContext } from '../context/SubContext';
 
 
 interface SubsFormModalProps extends ISubModal {
@@ -29,6 +30,8 @@ export const SubsFormModal = ({showModal, infoSubAvailable, setShowModal, curren
     cycle: 'mensual',
   })
 
+  const { add } = useContext(SubContext)
+
   const [showDatePicker, setShowDatePicker] = useState(false)
 
 
@@ -44,7 +47,19 @@ export const SubsFormModal = ({showModal, infoSubAvailable, setShowModal, curren
 
 
   const handleInputChange = (name: string, value: any) => {
-    setNewSubscription({...newSubscription, [name]:value})
+    setNewSubscription({
+      ...newSubscription, 
+      [name]:value,
+    })
+  }
+
+  const handleChangePrice = (value: string) => {
+     if (/^\d+$/.test(value) || value === ''){
+        setNewSubscription({
+              ...newSubscription,
+              price: Number(value) 
+            })
+     }
   }
 
   const renderDatePicker = () => {
@@ -63,10 +78,21 @@ export const SubsFormModal = ({showModal, infoSubAvailable, setShowModal, curren
   }
 
   const controlSub = () => {
-    //si va guardar
-    setShowModal(false)
-    setNestedModal && setNestedModal(false)
-    //si va actualizar
+    if(!currentId){
+      //si va guardar
+      if (newSubscription.name.trim() === '') {
+        return Alert.alert('Veri', 'El nombre es obligatorio')
+      }
+      add({
+        ...newSubscription,
+        ...infoSubAvailable
+      })
+      setShowModal(false)
+      setNestedModal && setNestedModal(false)
+    }else{
+      //si va actualizar
+
+    }
   }
 
   return (
@@ -90,6 +116,8 @@ export const SubsFormModal = ({showModal, infoSubAvailable, setShowModal, curren
               />
               <TextInput
                 style={styles.priceInput}
+                value={newSubscription.price!==0 ? newSubscription.price.toString() : ''}
+                onChangeText={(text) => handleChangePrice(text)}
                 keyboardType='numeric'
                 maxLength={7}
                 placeholderTextColor='#fff'

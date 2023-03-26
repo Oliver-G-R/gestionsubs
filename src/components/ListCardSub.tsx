@@ -1,33 +1,38 @@
 import { CardSub } from './Card';
-import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
-import { globalStyle } from '../constants/style';
+import { FlatList, ScrollView, StyleSheet, View } from 'react-native';
+import { useContext } from 'react';
+import { SubContext } from '../context/SubContext';
 
 export const ListCardSub = () => {
+  const { fullSubscription } = useContext(SubContext)
   return (
       <View style={Style.containerCard}>
-        <ScrollView 
+        <FlatList
           style={Style.containerCard}
           showsVerticalScrollIndicator={false}
-        >
-          <CardSub
-            icon={{
-              nameIcon: 'youtube',
-              color: '#FF0000',
-              type:"font-awesome"
-            }}
-            subInfo={{
-              id: "1",
-              name: 'Youtube Premium',
-              price: 11.99,
-              membership: 'Mensual',
-              description: 'Pago mensual compartido',
-              firstPayment: new Date(),
-              cycle: 'Mensual',
-            }}
-          />
-        
+          data={fullSubscription}
+          keyExtractor={item => item.id.toString()}
+          renderItem={({item}) => (
+            <CardSub
+              icon={{
+                nameIcon: item.nameIcon,
+                color: item.color,
+                type: item.type
+              }}
+              subInfo={{
+                id: item.id,
+                name: item.name,
+                price: item.price,
+                membership: item.membership,
+                description: item.description,
+                firstPayment: item.firstPayment,
+                cycle: item.cycle,
+              }}
+            />
+          )}
+          
+        />
     
-        </ScrollView>
       </View>
   )
 }

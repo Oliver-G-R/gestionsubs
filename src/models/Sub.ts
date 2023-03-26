@@ -7,9 +7,6 @@ interface Subscription {
     firstPayment: Date;
     cycle: 'mensual' | 'anual';
 }
-
-interface SubscriptionSatate extends Omit<Subscription, 'id'> {}
-
 interface IconService{
     nameIcon: string;
     color: string;
@@ -19,11 +16,13 @@ interface IconService{
 interface SubServiceAvailable extends IconService{
     title: string;
 }
-
+interface SubscriptionSatate extends Omit<Subscription, 'id'> {}
+interface FullSubscription extends Subscription, SubServiceAvailable{}
 
 export {
     Subscription,
     SubscriptionSatate,
     SubServiceAvailable,
+    FullSubscription,
     IconService
 }
