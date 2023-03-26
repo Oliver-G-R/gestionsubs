@@ -16,16 +16,18 @@ export const ChooseSub = ({setShowModal, showModal}:ISubModal) => {
 
   const [filterData] = useSearchFilter(subscriptionsAvailable, searchText, 'title')
 
-  // useEffect(() => {
-  //     !showAddSubModal && setShowModal(false)
-  // }, [showAddSubModal])
+  useEffect(() => {
+      if(!showAddSubModal && !selectedSub) {
+        setShowModal(false)
+      }
+  }, [showAddSubModal])
 
   return (
     <>
       <PopUpModal
         showModal={showModal}
         setIsOpen={setShowModal}
-        height={'85%'}
+        height={'95%'}
       > 
         <>
           <View style={styleChooseSub.boxSearch}>
@@ -61,6 +63,7 @@ export const ChooseSub = ({setShowModal, showModal}:ISubModal) => {
       {showAddSubModal && <SubsFormModal
         showModal={showAddSubModal}
         setShowModal={setShowAddSubModal}
+        setNestedModal={setShowModal}
         infoSubAvailable={selectedSub!}
       />}
     </>
