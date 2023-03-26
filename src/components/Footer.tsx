@@ -25,7 +25,7 @@ export const Footer = () => {
               />
             <View>
               <Text style={Style.alertTitle}>
-                Los gatos moderados son los que te permiten vivir una vida feliz y saludable.
+                Los gastos moderados son los que te permiten vivir una vida feliz y saludable.
               </Text>
               <Text style={Style.textAlert}>
                 Los gastos excesivos mensuales mayores a $1000 pesos, se mostrarán en rojo al igual 

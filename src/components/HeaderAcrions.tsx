@@ -14,6 +14,7 @@ export const HeaderAcrions = ({search, setSearch}:HeaderAcrionsProps) => {
       <View style={Style.headerAction}> 
           <View>
             <TextInput
+              style={Style.textInput}
               placeholderTextColor={'#fff'}
               onChangeText={setSearch}
               value={search}
@@ -39,6 +40,9 @@ export const HeaderAcrions = ({search, setSearch}:HeaderAcrionsProps) => {
 }
 
 const Style = StyleSheet.create({
+  textInput: {
+    color: '#fff',
+  },
   headerAction:{
     marginTop: 30,
     width: '80%',
