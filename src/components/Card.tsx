@@ -17,7 +17,7 @@ export const CardSub = (Props:CardSubProps) => {
             price,
             membership,
             description,
-            firstPayment,
+            paymentDay,
             cycle,
         }
     } = Props
@@ -83,33 +83,22 @@ export const CardSub = (Props:CardSubProps) => {
                         </Text>
                 </View>
                     
-                <View style={style.info}>
+                {description && <View style={style.info}>
                         <Text style={style.textInfo}>
                             Descripcion    
                         </Text>
                         <Text style={[style.textInfo, style.textInfoValue]}>
                             {description}
                         </Text>
-                </View>
+                </View>}
                     
-                <View style={style.info}>
-                    <Text style={style.textInfo}>
-                        Fecha de inicio    
-                    </Text>
-                    <Text style={[style.textInfo, style.textInfoValue]}>
-                        {
-                            new Date(firstPayment).toLocaleDateString()
-                        }
-                    </Text>
-                </View>
-
                 <View style={style.info}>
                     <Text style={style.textInfo}>
                         Fecha de pago
                     </Text>
                     <Text style={[style.textInfo, style.textInfoValue]}>
                         {
-                            new Date(firstPayment).toLocaleDateString()
+                            new Date(paymentDay).toLocaleDateString('es-ES')
                         }
                     </Text>
                 </View>

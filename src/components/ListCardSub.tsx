@@ -25,7 +25,7 @@ export const ListCardSub = () => {
                 price: item.price,
                 membership: item.membership,
                 description: item.description,
-                firstPayment: item.firstPayment,
+                paymentDay: item.paymentDay,
                 cycle: item.cycle,
               }}
             />

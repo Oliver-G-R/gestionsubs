@@ -26,7 +26,7 @@ export const SubsFormModal = ({showModal, infoSubAvailable, setShowModal, curren
     price: 0,
     membership: "Premium",
     description: "",
-    firstPayment: new Date(),
+    paymentDay: new Date(),
     cycle: 'mensual',
   })
 
@@ -36,12 +36,12 @@ export const SubsFormModal = ({showModal, infoSubAvailable, setShowModal, curren
 
 
   const onChangeDateIos = (e:DateTimePickerEvent, selectedDate: Date | undefined) => {
-    setNewSubscription({...newSubscription, firstPayment: new Date(selectedDate!)})
+    setNewSubscription({...newSubscription, paymentDay: new Date(selectedDate!)})
   }
   const onAndroidChange = (e: DateTimePickerEvent, selectedDate: Date | undefined) => {
     setShowDatePicker(false)
     if (selectedDate) {
-      setNewSubscription({...newSubscription, firstPayment: new Date(selectedDate)})
+      setNewSubscription({...newSubscription, paymentDay: new Date(selectedDate)})
     }
   }
 
@@ -68,7 +68,7 @@ export const SubsFormModal = ({showModal, infoSubAvailable, setShowModal, curren
         <DateTimePicker
           display={Platform.OS === 'ios' ? 'spinner' : 'default'}
           timeZoneOffsetInMinutes={0}
-          value={newSubscription.firstPayment}
+          value={newSubscription.paymentDay}
           mode='date'
           minimumDate={new Date()}
           onChange={Platform.OS === 'ios' ? onChangeDateIos : onAndroidChange}
@@ -166,11 +166,11 @@ export const SubsFormModal = ({showModal, infoSubAvailable, setShowModal, curren
               </View >
               <View style={styles.contentInput}>
                 <Text style={styles.textLabel}>
-                  Primer Pago
+                  Fecha de pago
                 </Text>
                 <Text style={styles.date} onPress={() => setShowDatePicker(true)}>
                     {
-                      new Date(newSubscription.firstPayment).toLocaleDateString('es-ES')
+                      new Date(newSubscription.paymentDay).toLocaleDateString('es-ES')
                     }
                 </Text>
                 
@@ -249,7 +249,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 25,
     color: '#fff',
-    marginVertical: 10
+    marginVertical: 10,
+    textAlign: 'center'
   },
   btnTextSave: {
     fontWeight: 'bold',

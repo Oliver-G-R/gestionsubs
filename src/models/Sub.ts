@@ -4,7 +4,7 @@ interface Subscription {
     price: number;
     membership: string;
     description: string;
-    firstPayment: Date;
+    paymentDay: Date;
     cycle: 'mensual' | 'anual';
 }
 interface IconService{
